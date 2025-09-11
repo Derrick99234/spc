@@ -21,14 +21,7 @@ export default function Home() {
   const [form, setForm] = useState<Post>({
     platform: "instagram",
     serviceType: "pre-service",
-    post: [
-      {
-        postType: "service-highlight",
-        viewCount: 1200,
-        reach: 300321,
-        amountSpent: 45000,
-      },
-    ],
+    post: [],
   });
   useEffect(() => {}, []);
   return (

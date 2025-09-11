@@ -40,9 +40,26 @@ function AddPostPopup({
     });
   };
 
-  const handleSubmit = () => {
-    console.log("Submitted Posts:", form);
-    onClose();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        `http://localhost:2025/form/${form.serviceType?.toUpperCase()}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
+
+      const data = await res.json();
+      alert(data.message);
+      setPost((prev) => ({ ...prev, post: [] }));
+      onClose();
+    } catch (error) {
+      alert("Failed to submit. Please try again later.");
+      return;
+    }
   };
   return (
     <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
