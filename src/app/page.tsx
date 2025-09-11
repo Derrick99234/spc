@@ -1,34 +1,36 @@
 "use client";
 import AddPostPopup from "@/components/add-post-popup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export interface Post {
-  postType: string;
-  amountSpent: number;
   platform?: string;
   serviceType?: string;
-  reach: number;
-  viewCount: number;
+  post: {
+    postType: string;
+    amountSpent: number;
+    reach: number;
+    viewCount: number;
+  }[];
 }
 
 export default function Home() {
-  const [serviceType, setServiceType] = useState("pre-service");
-  const [social, setSocial] = useState("instagram");
+  // const [serviceType, setServiceType] = useState("pre-service");
+  // const [social, setSocial] = useState("instagram");
   const [isOpen, setIsOpen] = useState(false);
   const closePopup = () => setIsOpen(false);
 
-  const [post, setPost] = useState<Post[]>([
-    {
-      platform: "instagram",
-      serviceType: "pre-service",
-      postType: "service-highlight",
-      viewCount: 1200,
-      reach: 300321,
-      amountSpent: 45000,
-    },
-  ]);
-  // React.useEffect(() => {
-  //   console.log("Service Type changed to:", serviceType);
-  // }, [serviceType]);
+  const [form, setForm] = useState<Post>({
+    platform: "instagram",
+    serviceType: "pre-service",
+    post: [
+      {
+        postType: "service-highlight",
+        viewCount: 1200,
+        reach: 300321,
+        amountSpent: 45000,
+      },
+    ],
+  });
+  useEffect(() => {}, []);
   return (
     <main className="flex justify-around items-start pt-20 min-h-screen bg-gray-900 px-16 gap-16">
       <div className="">
@@ -53,8 +55,8 @@ export default function Home() {
         <select
           id="service-type"
           name="service-type"
-          value={serviceType}
-          onChange={(e) => setServiceType(e.target.value)}
+          value={form.serviceType}
+          onChange={(e) => setForm({ ...form, serviceType: e.target.value })}
           className="mt-1 block bg-gray-600 outline-none w-full py-4 text-white px-4 rounded-md"
         >
           <option value="pre-service">Pre Service</option>
@@ -70,8 +72,8 @@ export default function Home() {
         <select
           id="social"
           name="social"
-          value={social}
-          onChange={(e) => setSocial(e.target.value)}
+          value={form.platform}
+          onChange={(e) => setForm({ ...form, platform: e.target.value })}
           className="mt-1 block bg-gray-600 outline-none w-full py-4 text-white px-4 rounded-md"
         >
           <option value="instagram">Instagram</option>
@@ -88,7 +90,7 @@ export default function Home() {
         </button>
       </form>
       {isOpen && (
-        <AddPostPopup onClose={closePopup} post={post} setPost={setPost} />
+        <AddPostPopup onClose={closePopup} form={form} setPost={setForm} />
       )}
     </main>
   );
