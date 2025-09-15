@@ -1,7 +1,9 @@
 "use client";
 import AddPostPopup from "@/components/add-post-popup";
 import DownloadExcelButton from "@/components/download-excel";
-import { useEffect, useState } from "react";
+import RestrictionPopup from "@/components/restriction-popup";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 export interface Post {
   platform?: string;
   serviceType?: string;
@@ -19,12 +21,14 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const closePopup = () => setIsOpen(false);
 
+  const router = useRouter();
+
   const [form, setForm] = useState<Post>({
     platform: "instagram",
     serviceType: "pre-service",
     post: [],
   });
-  useEffect(() => {}, []);
+  const [showRestriction, setShowRestriction] = useState(true);
   return (
     <main className="flex justify-around items-start pt-20 min-h-screen bg-gray-900 px-16 gap-16 relative">
       <DownloadExcelButton />
@@ -86,6 +90,12 @@ export default function Home() {
       </form>
       {isOpen && (
         <AddPostPopup onClose={closePopup} form={form} setPost={setForm} />
+      )}
+      {showRestriction && (
+        <RestrictionPopup
+          setShowRestriction={setShowRestriction}
+          onClose={() => router.push("https://www.google.com/")}
+        />
       )}
     </main>
   );

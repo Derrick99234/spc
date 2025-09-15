@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev": "node init && next dev --turbopack",
+    "build": "node init && next build --turbopack",
     "export": "next build && next export",
-    "start": "next start",
+    "start": "node init && next start",
     "lint": "eslint"
   },
   "dependencies": {
