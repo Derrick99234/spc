@@ -44,7 +44,7 @@ function AddPostPopup({
     e.preventDefault();
     try {
       const res = await fetch(
-        `http://localhost:2025/form/${form.serviceType?.toUpperCase()}`,
+        `https://spc-api-whni.onrender.com/form/${form.serviceType?.toUpperCase()}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

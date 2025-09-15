@@ -1,5 +1,6 @@
 "use client";
 import AddPostPopup from "@/components/add-post-popup";
+import DownloadExcelButton from "@/components/download-excel";
 import { useEffect, useState } from "react";
 export interface Post {
   platform?: string;
@@ -25,7 +26,8 @@ export default function Home() {
   });
   useEffect(() => {}, []);
   return (
-    <main className="flex justify-around items-start pt-20 min-h-screen bg-gray-900 px-16 gap-16">
+    <main className="flex justify-around items-start pt-20 min-h-screen bg-gray-900 px-16 gap-16 relative">
+      <DownloadExcelButton />
       <div className="">
         <h1 className="text-5xl text-white">SPECIAL PROMOTIONAL CAMPAIGN</h1>
         <h3 className="text-gray-300 text-lg mt-8 mb-4">POST TYPE</h3>
